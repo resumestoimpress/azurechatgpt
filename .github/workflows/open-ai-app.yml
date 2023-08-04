@@ -67,17 +67,18 @@ jobs:
         with:
           name: Nextjs-site
 
-      - name: 🗝️ Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+#      - name: 🗝️ Azure Login
+#        uses: azure/login@v1
+#        with:
+#          creds: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
 
       - name: 🚀 Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.AZURE_APP_SERVICE_NAME }}
-          package: ${{ github.workspace }}/Nextjs-site.zip
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+#          app-name: ${{ secrets.AZURE_APP_SERVICE_NAME }}
+#          package: ${{ github.workspace }}/Nextjs-site.zip
 
       - name: 🧹 Cleanup
         run: rm ${{ github.workspace }}/Nextjs-site.zip
